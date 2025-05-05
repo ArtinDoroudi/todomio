@@ -9,6 +9,11 @@ class Task extends Model
     protected $fillable = [
         'title',
         'description',
-        'status',
+        'is_completed',
     ];
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class, 'task_tag');
+    }
 }
