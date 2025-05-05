@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
+
     public function index()
     {
         return Task::all();
@@ -16,27 +17,28 @@ class TaskController extends Controller
     {
         $data = $request->validate([
             'title' => 'required|string|max:255',
-            'content' => 'required|string',
+            'description' => 'required|string',
+            'status' => 'required|string',
         ]);
 
-        $post = Task::create($data);
-        return response()->json($post, 201);
+        $task = Task::create($data);
+        return response()->json($task, 201);
     }
 
-    public function show(Task $post)
+    public function show(Task $task)
     {
-        return $post;
+        return $task;
     }
 
-    public function update(Request $request, Task $post)
+    public function update(Request $request, Task $task)
     {
-        $post->update($request->only(['title', 'content']));
-        return response()->json($post);
+        $task->update($request->only(['title', 'description', 'status']));
+        return response()->json($task);
     }
 
-    public function destroy(Task $post)
+    public function destroy(Task $task)
     {
-        $post->delete();
+        $task->delete();
         return response()->json(null, 204);
     }
 }
