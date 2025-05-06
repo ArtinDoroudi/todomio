@@ -10,6 +10,7 @@ class Task extends Model
         'title',
         'description',
         'is_completed',
+        'user_id',
     ];
 
     public function tags()
